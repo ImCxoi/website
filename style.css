@@ -1,1 +1,13 @@
-h1 {color:green; }
+*{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    height: 100%;
+    width: 100%;
+    background-image: url(images/techno.png);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
