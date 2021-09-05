@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b735ee2c-dd53-4934-9246-b0cc2fdb6ccf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/controller.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/CNAME" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/game.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
