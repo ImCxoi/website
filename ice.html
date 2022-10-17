@@ -6,35 +6,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="color-scheme" content="light dark"/>
         <link rel="stylesheet" href="ice.css"/>
-        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
         <link rel="shortcut icon" type="image/png" href="images/ice.png"/>
-        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://lonekorean.github.io/highlight-within-textarea/jquery.highlight-within-textarea.js"></script>
     </head>
     <body">
         <div class="container">
-            <div class="box">
-                <py-script>
-
-                </py-script>
-                <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here"></textarea>
-            </div>    
-            <py-button class="buttongui" label="Generate">
-                def on_click(*args, **kwargs):
-                    string = Element("plot").element.value
-                    badwords = {
-                    "not": "", "Not": "",
-                    "don't": "do", "Don't": "Do",
-                    "can't": "can", "Can't": "Can",
-                    "won't": "will", "Won't": "Will",
-                    "wouldn't": "would", "Wouldn't": "Would",
-                    "couldn't": "could", "Couldn't": "Could",
-                    "shouldn't": "should", "Shouldn't": "Should",
+            <div class="box"></div>
+                <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
+            </div>
+            <script>
+                var dict = [" not ", "don't", "can't", "won't", "wouldn't", "couldn't", "shouldn't"];
+                $('.textarea').highlightWithinTextarea({
+                    highlight: dict
+                });
+                function countWord() {
+                    var words = document
+                        .getElementById("plot").value;
+                    var count = 0;
+                    var split = words.split(' ');
+                    for (var i = 0; i < split.length; i++) {
+                        if (split[i] != "") {
+                            ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
+                            if (ele.getElementsByTagName('mark').item(i)) {
+                                count += 1;
+                            } 
+                        }
                     }
-                    result = ' '.join(badwords.get(i, i) for i in string.split())
-                    finalsResult = ' '.join(result.split())
-                    Element("plot").element.value = finalsResult
-            </py-button>
+                    document.getElementById("show")
+                        .innerHTML = count;
+                    }
+            </script>  
+        </body>
+        <div class="count"> Word Count:
+            <span id="show">0</span>
         </div>
     </body>
 </html>
