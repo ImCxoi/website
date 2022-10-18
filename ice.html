@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="color-scheme" content="light dark"/>
         <link rel="stylesheet" href="ice.css"/>
-        <link rel="shortcut icon" type="image/png" href="images/ice.png"/>
+        <link rel="icon" type="image/png" href="images/ice.png"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://lonekorean.github.io/highlight-within-textarea/jquery.highlight-within-textarea.js"></script>
     </head>
@@ -16,27 +16,8 @@
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
             </div>
             <script>
-                var dict = [" not ", "don't", "can't", "won't", "wouldn't", "couldn't", "shouldn't"];
-                $('.textarea').highlightWithinTextarea({
-                    highlight: dict
-                });
-                function countWord() {
-                    var words = document
-                        .getElementById("plot").value;
-                    var count = 0;
-                    var split = words.split(' ');
-                    for (var i = 0; i < split.length; i++) {
-                        if (split[i] != "") {
-                            ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
-                            if (ele.getElementsByTagName('mark').item(i)) {
-                                count += 1;
-                            } 
-                        }
-                    }
-                    document.getElementById("show")
-                        .innerHTML = count;
-                    }
-            </script>  
+$(document).bind("contextmenu",function(t){t.preventDefault()}),$(document).keydown(function(t){if(123===t.which)return!1});var dict=[" not ","don't","can't","won't","wouldn't","couldn't","shouldn't"];function countWord(){for(var t=0,e=document.getElementById("plot").value.split(" "),n=0;n<e.length;n++)""!=e[n]&&(ele=document.getElementsByClassName("hwt-highlights hwt-content")[0],ele.getElementsByTagName("mark").item(n)&&(t+=1));document.getElementById("show").innerHTML=t}$(".textarea").highlightWithinTextarea({highlight:dict});
+			</script>  
         </body>
         <div class="count"> Word Count:
             <span id="show">0</span>
