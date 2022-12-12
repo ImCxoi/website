@@ -16,8 +16,39 @@
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
             </div>
             <script>
-$(document).bind("contextmenu",function(t){t.preventDefault()}),$(document).keydown(function(t){if(123===t.which)return!1});var dict=[" not ","don't","can't","won't","wouldn't","couldn't","shouldn't","ain't","aren't","cannot","should","but","didn't","doesn't","hadn't","hasn't","haven't","isn't","mustn't","never","ought","shant","wasn't","weren't"];function countWord(){for(var t=0,e=document.getElementById("plot").value.split(" "),n=0;n<e.length;n++)""!=e[n]&&(ele=document.getElementsByClassName("hwt-highlights hwt-content")[0],ele.getElementsByTagName("mark").item(n)&&(t+=1));document.getElementById("show").innerHTML=t}$(".textarea").highlightWithinTextarea({highlight:dict});
-			</script>  
+                var dict = ["not", "don't", "can't", "won't", "wouldn't", "couldn't", "shouldn't"];
+                var editText = dict.map(i => 'xx' + i);
+                $('.textarea').highlightWithinTextarea({
+                    highlight: editText
+                });
+                function countWord() {
+                    var Text = $('.textarea').val()
+                    
+                    
+                contains = dict.some(element => {
+                    if (Text.includes(element)) {
+                        var changeText = Text.replaceAll(" " + element + " ", " xx" + element + " ")
+                        $('.textarea').val(changeText);
+                    }
+                });
+
+                
+                var words = document
+                    .getElementById("plot").value;
+                var count = 0;
+                var split = words.split(' ');
+                for (var i = 0; i < split.length; i++) {
+                    if (split[i] != "") {
+                        ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
+                        if (ele.getElementsByTagName('mark').item(i)) {
+                            count += 1;
+                        } 
+                    }
+                }
+                document.getElementById("show")
+                    .innerHTML = count;
+                }
+            </script>  
         </body>
         <div class="count"> Word Count:
             <span id="show">0</span>
