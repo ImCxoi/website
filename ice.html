@@ -50,12 +50,13 @@
                                 
                                 if (element.indexOf(' ') >= 0) {
                                     var changeText = text.replaceAll(element, " xx" + element.slice(1))
-                                    if (document.getElementById('btn').className == 'on') {
-                                        $('.textarea').val(changeText);
-                                    }
-                                    else {
-                                        $('.textarea').val(changeText.replace(/\n/g, ' '));
-                                    }
+                                    $('.textarea').val(changeText);
+                                    //if (document.getElementById('btn').className == 'on') {
+                                    //    $('.textarea').val(changeText);
+                                    //}
+                                    //else {
+                                    //    $('.textarea').val(changeText.replace(/\n/g, ' '));
+                                    //}
                                     
                                 }
                             
