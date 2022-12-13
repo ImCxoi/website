@@ -49,9 +49,14 @@
                             if (text.includes(element)) {
                                 
                                 if (element.indexOf(' ') >= 0) {
-
                                     var changeText = text.replaceAll(element, " xx" + element.slice(1))
-                                    $('.textarea').val(changeText.replace(/\n/g, ' '));
+                                    if (document.getElementById('btn').className == 'on') {
+                                        $('.textarea').val(changeText);
+                                    }
+                                    else {
+                                        $('.textarea').val(changeText.replace(/\n/g, ' '));
+                                    }
+                                    
                                 }
                             
                             } 
@@ -63,10 +68,22 @@
                 });
                 countWord()
                 }
+                function togglestyle(test){
+                    if(test.className === "on") {
+                        
+                        document.getElementById('btn').value = "Keep Formatting: ❌"
+                        test.className="off";
+                    } else {
+                        
+                        test.className="on";
+                        document.getElementById('btn').value = "Keep Formatting: ✔️"
+                    }
+                }
                 
             </script>  
         </body>
         <button type="button" class="buttongui" onclick="doWork()">Generate</button>
+        <input type="button" id="btn" value="Keep Formatting: ✔️" class="on" onclick="togglestyle(btn)" />
         <div class="count"> Word Count:
             <span id="show">0</span>
         </div>
