@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <html lang="en"></html>
@@ -16,40 +17,52 @@
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
             </div>
             <script>
-                var dict = ["not", "don't", "can't", "won't", "wouldn't", "couldn't", "shouldn't"];
-                var editText = dict.map(i => 'xx' + i);
+                document.body.style.zoom="90%"
+                var dict = [" not ", " don't ", " can't ", " won't ", " wouldn't ", " couldn't ", " shouldn't "];
+                var editText = dict.map(i => 'xx' + i.slice(1));
                 $('.textarea').highlightWithinTextarea({
                     highlight: editText
                 });
-                function countWord() {
-                    var Text = $('.textarea').val()
-                    
-                    
-                contains = dict.some(element => {
-                    if (Text.includes(element)) {
-                        var changeText = Text.replaceAll(" " + element + " ", " xx" + element + " ")
-                        $('.textarea').val(changeText);
+                function countWord() {    
+                    var words = document.getElementById("plot").value;
+                    var count = 0;
+                    var split = words.split(' ');
+                    for (var i = 0; i < split.length; i++) {
+                        if (split[i] != "") {
+                            ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
+                            if (ele.getElementsByTagName('mark').item(i)) {
+                                count += 1;
+                            } 
+                        }
                     }
-                });
+                    document.getElementById("show").innerHTML = count;
+                }
+                function doWork() {
+                    for (i=0; i<dict.length; i++) {
+                    var text = $('.textarea').val()
 
-                
-                var words = document
-                    .getElementById("plot").value;
-                var count = 0;
-                var split = words.split(' ');
-                for (var i = 0; i < split.length; i++) {
-                    if (split[i] != "") {
-                        ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
-                        if (ele.getElementsByTagName('mark').item(i)) {
-                            count += 1;
-                        } 
+                        contains = dict.some(element => {
+                            
+
+                            if (text.includes(element)) {
+                                
+                                if (element.indexOf(' ') >= 0) {
+
+                                    var changeText = text.replaceAll(element, " xx" + element.slice(1))
+                                    $('.textarea').val(changeText.replace(/\n/g, ' '));
+                                    console.log("i")
+                                }
+                            
+                            } 
+                            
+                        });
+                        console.log(" ")
                     }
                 }
-                document.getElementById("show")
-                    .innerHTML = count;
-                }
+                
             </script>  
         </body>
+        <button type="button" class="buttongui" onclick="doWork()">Generate</button>
         <div class="count"> Word Count:
             <span id="show">0</span>
         </div>

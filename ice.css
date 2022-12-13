@@ -13,13 +13,12 @@
 		--highlight-color: yellow;
 	}
 }
-
 *{
     margin: 0;
     padding: 0;
 	font-family: "euclid_circular";
 }
-
+html, body { height: 100% }
 body{
     height: 100%;
     width: 100%;
@@ -47,8 +46,9 @@ body{
 	font-display: swap;
 	font-size: 10px;
     position: absolute;
-    top: 2%;
+    top: 20%;
     left: 30%;
+
 }
 .container{
 	position: relative;
@@ -66,7 +66,8 @@ body{
 	display: flex;
 	font-size: 5rem;
 	transform: translate(-50%, -50%);
-	
+	max-width: max-content;
+	max-height: 30%;
 }
 
 .container .hwt-container {
@@ -95,7 +96,7 @@ body{
 }
 .textarea {
 	width: 100%;
-	height: 100%;
+	height: 200%;
 	background: var(--textbox-background);
 	float: left;
 	margin: 10px;
@@ -111,8 +112,9 @@ body{
 }
 
 .count {
-	position:relative;
-	max-width: 9.5%;
+	position:fixed;
+	bottom: 0%;
+	max-width: 20%;
 	background-color: var(--textbox-background);
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -178,7 +180,10 @@ body{
 	left: 50%;
 	font-size: 50px;
 	outline: none;
+	border: none;
 	transform: translate(-50%, -50%);
+	background-color: var(--textbox-background);
+	background-repeat: no-repeat;
 }
 
 @media(max-width: 700px){
