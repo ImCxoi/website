@@ -19,7 +19,7 @@
             <script>
                 document.body.style.zoom="100%"
                 var dict = [" not ", " don't ", " can't ", " won't ", " wouldn't ", " couldn't ", " shouldn't "];
-                var editText = dict.map(i => 'xx' + i.slice(1));
+                var editText = dict.map(i => 'xx' + i.slice(1).slice(0, -1)); 
                 $('.textarea').highlightWithinTextarea({
                     highlight: editText
                 });
