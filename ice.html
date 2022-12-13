@@ -17,13 +17,14 @@
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
             </div>
             <script>
-                document.body.style.zoom="90%"
+                document.body.style.zoom="100%"
                 var dict = [" not ", " don't ", " can't ", " won't ", " wouldn't ", " couldn't ", " shouldn't "];
                 var editText = dict.map(i => 'xx' + i.slice(1));
                 $('.textarea').highlightWithinTextarea({
                     highlight: editText
                 });
                 function countWord() {    
+
                     var words = document.getElementById("plot").value;
                     var count = 0;
                     var split = words.split(' ');
@@ -38,6 +39,7 @@
                     document.getElementById("show").innerHTML = count;
                 }
                 function doWork() {
+
                     for (i=0; i<dict.length; i++) {
                     var text = $('.textarea').val()
 
@@ -50,14 +52,16 @@
 
                                     var changeText = text.replaceAll(element, " xx" + element.slice(1))
                                     $('.textarea').val(changeText.replace(/\n/g, ' '));
-                                    console.log("i")
                                 }
                             
                             } 
                             
                         });
-                        console.log(" ")
                     }
+                $('.textarea').highlightWithinTextarea({
+                    highlight: editText
+                });
+                countWord()
                 }
                 
             </script>  
