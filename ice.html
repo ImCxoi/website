@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <html lang="en"></html>
@@ -16,9 +17,74 @@
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
             </div>
             <script>
-$(document).bind("contextmenu",function(t){t.preventDefault()}),$(document).keydown(function(t){if(123===t.which)return!1});var dict=[" not ","don't","can't","won't","wouldn't","couldn't","shouldn't","ain't","aren't","cannot","should","but","didn't","doesn't","hadn't","hasn't","haven't","isn't","mustn't","never","ought","shant","wasn't","weren't"];function countWord(){for(var t=0,e=document.getElementById("plot").value.split(" "),n=0;n<e.length;n++)""!=e[n]&&(ele=document.getElementsByClassName("hwt-highlights hwt-content")[0],ele.getElementsByTagName("mark").item(n)&&(t+=1));document.getElementById("show").innerHTML=t}$(".textarea").highlightWithinTextarea({highlight:dict});
-			</script>  
+                document.body.style.zoom="100%"
+                var dict = [" not ", " don't ", " can't ", " won't ", " wouldn't ", " couldn't ", " shouldn't "];
+                var editText = dict.map(i => 'xx' + i.slice(1).slice(0, -1)); 
+                $('.textarea').highlightWithinTextarea({
+                    highlight: editText
+                });
+                function countWord() {    
+
+                    var words = document.getElementById("plot").value;
+                    var count = 0;
+                    var split = words.split(' ');
+                    for (var i = 0; i < split.length; i++) {
+                        if (split[i] != "") {
+                            ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
+                            if (ele.getElementsByTagName('mark').item(i)) {
+                                count += 1;
+                            } 
+                        }
+                    }
+                    document.getElementById("show").innerHTML = count;
+                }
+                function doWork() {
+
+                    for (i=0; i<dict.length; i++) {
+                    var text = $('.textarea').val()
+
+                        contains = dict.some(element => {
+                            
+
+                            if (text.includes(element)) {
+                                
+                                if (element.indexOf(' ') >= 0) {
+                                    var changeText = text.replaceAll(element, " xx" + element.slice(1))
+                                    $('.textarea').val(changeText);
+                                    //if (document.getElementById('btn').className == 'on') {
+                                    //    $('.textarea').val(changeText);
+                                    //}
+                                    //else {
+                                    //    $('.textarea').val(changeText.replace(/\n/g, ' '));
+                                    //}
+                                    
+                                }
+                            
+                            } 
+                            
+                        });
+                    }
+                $('.textarea').highlightWithinTextarea({
+                    highlight: editText
+                });
+                countWord()
+                }
+                function togglestyle(test){
+                    if(test.className === "on") {
+                        
+                        document.getElementById('btn').value = "Keep Formatting: ❌"
+                        test.className="off";
+                    } else {
+                        
+                        test.className="on";
+                        document.getElementById('btn').value = "Keep Formatting: ✔️"
+                    }
+                }
+                
+            </script>  
         </body>
+        <button type="button" class="buttongui" onclick="doWork()">Generate</button>
+        
         <div class="count"> Word Count:
             <span id="show">0</span>
         </div>

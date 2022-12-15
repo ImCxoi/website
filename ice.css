@@ -13,13 +13,12 @@
 		--highlight-color: yellow;
 	}
 }
-
 *{
     margin: 0;
     padding: 0;
 	font-family: "euclid_circular";
 }
-
+html, body { height: 100% }
 body{
     height: 100%;
     width: 100%;
@@ -47,8 +46,9 @@ body{
 	font-display: swap;
 	font-size: 10px;
     position: absolute;
-    top: 2%;
+    top: 20%;
     left: 30%;
+
 }
 .container{
 	position: relative;
@@ -66,7 +66,8 @@ body{
 	display: flex;
 	font-size: 5rem;
 	transform: translate(-50%, -50%);
-	
+	max-width: max-content;
+	max-height: 30%;
 }
 
 .container .hwt-container {
@@ -76,7 +77,6 @@ body{
 	margin: 0px;
 	box-sizing: border-box;
 	border-color: #fff;
-	overflow: hidden;
 	border-radius: 10px;
 	font-size: 1.2rem;
 	display: flex;
@@ -101,7 +101,8 @@ body{
 	margin: 10px;
 	box-sizing: border-box;
 	border-color: black;
-	overflow: show;
+	overflow-y: auto !important;
+	overflow-x: hidden;
 	border-radius: 10px;
 	font-size: 1.2rem;
 	display: block;
@@ -111,9 +112,10 @@ body{
 }
 
 .count {
-	position:relative;
-	max-width: 9.5%;
+	position:fixed;
+	bottom: 0%;
 	background-color: var(--textbox-background);
+	background-repeat: no-repeat;
 	box-sizing: border-box;
 	border-radius: 10px;
 	font-size: 2rem;
@@ -178,7 +180,41 @@ body{
 	left: 50%;
 	font-size: 50px;
 	outline: none;
+	border: none;
 	transform: translate(-50%, -50%);
+	background-color: var(--textbox-background);
+	background-repeat: no-repeat;
+}
+.on { 
+	position:fixed;
+	bottom: 0%;
+	left: 10%;
+	max-width: 20%;
+	background-color: var(--textbox-background);
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+	border-radius: 10px;
+	font-size: 2rem;
+	margin: 1%;
+	padding: 5px;
+	outline: none;
+	border: none;
+	}
+
+.off {
+	position:fixed;
+	bottom: 0%;
+	left: 10%;
+	max-width: 20%;
+	background-color: var(--textbox-background);
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+	border-radius: 10px;
+	font-size: 2rem;
+	margin: 1%;
+	padding: 5px;
+	outline: none;
+	border: none;
 }
 
 @media(max-width: 700px){
