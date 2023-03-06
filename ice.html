@@ -14,57 +14,64 @@
     <body">
         <div class="container">
             <div class="box"></div>
-                <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()"></textarea>
+                <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()" onpaste="paste()"></textarea>
+                <button type="button" class="buttongui" onclick="doWork()">Generate</button>
             </div>
+            <div class="count">Word Count: <span id="show">0</span></div>
             <script>
-                document.body.style.zoom="100%"
-                var dict = ["can't","couldn't","don't","nonchalant","noncompliant","noncommittal","nonconformist","nonexistent","nonessential","nonfunctional","nonplussed","nonrenewable","nonresponsive","nonverbal","nonviolent","nobody","no","none","nor","not","notorious","nothing","nowhere","shouldn't","won't","wouldn't"];
-                var editText = dict.map(i => 'xx' + i);          
-                count = 0;
+                const dict = ["can't","couldn't","don't","nonchalant","noncompliant","noncommittal","nonconformist","nonexistent","nonessential","nonfunctional","nonplussed","nonrenewable","nonresponsive","nonverbal","nonviolent","nobody","no","none","nor","not","notorious","nothing","nowhere","shouldn't","won't","wouldn't"];
+                const editText = dict.map(i => 'xx' + i);     
+                const dictRegex = new RegExp("\\b(" + dict.join("|") + ")\\b", "gi");  
+                const $textarea = $('.textarea');
+                let matches = [];
+                let text = [];
+                let $count = [];
+                let count = matches.length;
 
-                $('.textarea').highlightWithinTextarea({
-                    highlight: dict
+                $textarea.highlightWithinTextarea({
+                    highlight: dictRegex
                 });
 
                 function countWord() {
-                    var text = document.getElementById("plot").value;
-                    var regex = new RegExp(dict.join("|"), "gi");
-                    var matches = text.match(regex) || [];
-                    document.getElementById("show").innerHTML = matches.length;
+                    text = $('#plot').val();
+                    $count = $('#show');
+                    count = matches.length
+                    matches = text.match(dictRegex) || [];
+                    $count.text(count);
                 }
-
+                
                 function doWork() {
-                    var text = document.getElementById("plot").value;
-                    var regex = new RegExp(dict.join("|"), "gi");
-                    var count = (text.match(regex) || []).length;
                     if (count > 0) {
-                        var changeText = text.replace(regex, function(match) {return "xx" + match;});
-                        $('.textarea').val(changeText);
-                        $('.textarea').highlightWithinTextarea({
+                        const changeText = text.replace(dictRegex, function(match) {return "xx" + match;});
+                        $textarea.val(changeText);
+                        $textarea.highlightWithinTextarea({
                             highlight: editText,
                         });
                     }
-                    document.getElementById("show").innerHTML = count;
+                    $count.text(count);
+                    
+                }
+                function paste() {
+                    setTimeout(function() {
+                        $textarea.scrollTop(0);
+                        countWord()
+                    }, 0);
                 }
 
-                function togglestyle(test){
-                    if(test.className === "on") {
+                //function togglestyle(test){
+                //    if(test.className === "on") {
                         
-                        document.getElementById('btn').value = "Keep Formatting: ❌"
-                        test.className="off";
-                    } else {
+                //        document.getElementById('btn').value = "Keep Formatting: ❌"
+                //        test.className="off";
+                //    } else {
                         
-                        test.className="on";
-                        document.getElementById('btn').value = "Keep Formatting: ✔️"
-                    }
-                }
-
+                //        test.className="on";
+                //        document.getElementById('btn').value = "Keep Formatting: ✔️"
+                //    }
+                //}
+                "use strict";
+                document.body.style.zoom="100%"
             </script>  
         </body>
-        <button type="button" class="buttongui" onclick="doWork()">Generate</button>
-        <div class="count"> Word Count:
-            
-            <span id="show">0</span>
-        </div>
     </body>
 </html>
