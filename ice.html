@@ -18,57 +18,35 @@
             </div>
             <script>
                 document.body.style.zoom="100%"
-                var dict = [" not ", " don't ", " can't ", " won't ", " wouldn't ", " couldn't ", " shouldn't ", " no ", " none ", " nor ", " nothing ", " nowhere ", " nobody ", " nonexistant ", " nonresponsive ", " nonessential ", " noncompliant ", " notorious ", " nonfunctional ", " nonrenewable ", " nonverbal ", " nonviolent ", " nonchalant ", " nonconformist ", " nonplussed ", " noncommittal"];                             
-                var editText = dict.map(i => 'xx' + i.slice(1).slice(0, -1)); 
-                $('.textarea').highlightWithinTextarea({
-                    highlight: editText
-                });
-                function countWord() {    
+                var dict = ["can't","couldn't","don't","nonchalant","noncompliant","noncommittal","nonconformist","nonexistent","nonessential","nonfunctional","nonplussed","nonrenewable","nonresponsive","nonverbal","nonviolent","nobody","no","none","nor","not","notorious","nothing","nowhere","shouldn't","won't","wouldn't"];
+                var editText = dict.map(i => 'xx' + i);          
+                count = 0;
 
-                    var words = document.getElementById("plot").value;
-                    var count = 0;
-                    var split = words.split(' ');
-                    for (var i = 0; i < split.length; i++) {
-                        if (split[i] != "") {
-                            ele = document.getElementsByClassName("hwt-highlights hwt-content")[0]
-                            if (ele.getElementsByTagName('mark').item(i)) {
-                                count += 1;
-                            } 
-                        }
+                $('.textarea').highlightWithinTextarea({
+                    highlight: dict
+                });
+
+                function countWord() {
+                    var text = document.getElementById("plot").value;
+                    var regex = new RegExp(dict.join("|"), "gi");
+                    var matches = text.match(regex) || [];
+                    document.getElementById("show").innerHTML = matches.length;
+                }
+
+                function doWork() {
+                    var text = document.getElementById("plot").value;
+                    var regex = new RegExp(dict.join("|"), "gi");
+                    var count = (text.match(regex) || []).length;
+                    if (count > 0) {
+                        var changeText = text.replace(regex, function(match) {return "xx" + match;});
+                        $('.textarea').val(changeText);
+                        $('.textarea').highlightWithinTextarea({
+                            highlight: editText,
+                        });
                     }
                     document.getElementById("show").innerHTML = count;
                 }
-                function doWork() {
 
-                    for (i=0; i<dict.length; i++) {
-                    var text = $('.textarea').val()
-
-                        contains = dict.some(element => {
-                            
-
-                            if (text.includes(element)) {
-                                
-                                if (element.indexOf(' ') >= 0) {
-                                    var changeText = text.replaceAll(element, " xx" + element.slice(1))
-                                    $('.textarea').val(changeText);
-                                    //if (document.getElementById('btn').className == 'on') {
-                                    //    $('.textarea').val(changeText);
-                                    //}
-                                    //else {
-                                    //    $('.textarea').val(changeText.replace(/\n/g, ' '));
-                                    //}
-                                    
-                                }
-                            
-                            } 
-                            
-                        });
-                    }
-                $('.textarea').highlightWithinTextarea({
-                    highlight: editText
-                });
-                countWord()
-                }
                 function togglestyle(test){
                     if(test.className === "on") {
                         
@@ -80,12 +58,12 @@
                         document.getElementById('btn').value = "Keep Formatting: ✔️"
                     }
                 }
-                
+
             </script>  
         </body>
         <button type="button" class="buttongui" onclick="doWork()">Generate</button>
-        
         <div class="count"> Word Count:
+            
             <span id="show">0</span>
         </div>
     </body>
