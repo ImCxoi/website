@@ -4,7 +4,6 @@
         <html lang="en"></html>
         <title>Cxoi.net</title>
         <h1 class="centered">(K)notty Generator</h1>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="color-scheme" content="light dark"/>
         <link rel="stylesheet" href="ice.css"/>
         <link rel="icon" type="image/png" href="images/ice.png"/>
@@ -12,6 +11,7 @@
         <script src="https://lonekorean.github.io/highlight-within-textarea/jquery.highlight-within-textarea.js"></script>
     </head>
     <body">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <div class="container">
             <div class="box"></div>
                 <textarea type="text" class="textarea" name="plot" id="plot" placeholder="Enter text here" oninput="countWord()" onpaste="paste()"></textarea>
@@ -23,10 +23,10 @@
                 const editText = dict.map(i => 'xx' + i);     
                 const dictRegex = new RegExp("\\b(" + dict.join("|") + ")\\b", "gi");  
                 const $textarea = $('.textarea');
-                let matches = [];
                 let text = [];
+                let count = [];
                 let $count = [];
-                let count = matches.length;
+                let matches = [];
 
                 $textarea.highlightWithinTextarea({
                     highlight: dictRegex
