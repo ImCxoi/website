@@ -21,54 +21,69 @@
             <script>
                 const dict = ["can't","couldn't","don't","nonchalant","noncompliant","noncommittal","nonconformist","nonexistent","nonessential","nonfunctional","nonplussed","nonrenewable","nonresponsive","nonverbal","nonviolent","nobody","no","none","nor","not","notorious","nothing","nowhere","shouldn't","won't","wouldn't"];
                 const editText = dict.map(i => 'xx' + i);     
-                const dictRegex = new RegExp("\\b(" + dict.join("|") + ")\\b", "gi");  
+                const dictRegex = new RegExp("\\b(" + dict.join("|") + ")\\b", "gi"); 
+                const editTextRegex = new RegExp("\\b(" + editText.join("|") + ")\\b", "gi"); 
                 const $textarea = $('.textarea');
                 let text = [];
                 let count = [];
                 let $count = [];
                 let matches = [];
 
-                $textarea.highlightWithinTextarea({
-                    highlight: dictRegex
-                });
-
+                function hilightText() {
+                    $textarea.highlightWithinTextarea({
+                        highlight: [
+                            {
+                                highlight: editText,
+                                className: 'blue'
+                            },
+                            {
+                                highlight: dictRegex,
+                                className: 'blue'
+                            }
+                        ]
+                    });
+                }
+                hilightText()
+                
                 function countWord() {
                     text = $('#plot').val();
                     $count = $('#show');
-                    count = matches.length
                     matches = text.match(dictRegex) || [];
-                    $count.text(count);
+                    xmatches = text.match(editTextRegex) || [];
+                    count = matches.length;
+                    xcount = xmatches.length;
+                    $count.text(count+xcount);
                 }
                 
                 function doWork() {
                     if (count > 0) {
                         const changeText = text.replace(dictRegex, function(match) {return "xx" + match;});
                         $textarea.val(changeText);
-                        $textarea.highlightWithinTextarea({
-                            highlight: editText,
-                        });
+                        hilightText()
                     }
-                    $count.text(count);
+                    countWord()
                     
                 }
                 function paste() {
                     setTimeout(function() {
-                        $textarea.scrollTop(0);
+                        //$textarea.scrollTop(0);
                         countWord()
                     }, 0);
                 }
 
-                //function togglestyle(test){
-                //    if(test.className === "on") {
+                /*
+                function togglestyle(test){
+                    if(test.className === "on") {
                         
-                //        document.getElementById('btn').value = "Keep Formatting: ❌"
-                //        test.className="off";
-                //    } else {
+                        document.getElementById('btn').value = "Keep Formatting: ❌"
+                        test.className="off";
+                    } else {
                         
-                //        test.className="on";
-                //        document.getElementById('btn').value = "Keep Formatting: ✔️"
-                //    }
-                //}
+                        test.className="on";
+                        document.getElementById('btn').value = "Keep Formatting: ✔️"
+                    }
+                }
+                */
                 "use strict";
                 document.body.style.zoom="100%"
             </script>  

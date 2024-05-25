@@ -110,7 +110,9 @@ body{
 	outline: none;
 	resize: none;
 }
-
+.hwt-content mark.blue {
+	background-color: #409cda;
+}
 .count {
 	position:fixed;
 	bottom: 0%;
