@@ -13,4 +13,6 @@ canvas {
   cursor: grab;
 }
 
-
+h1 {
+	display: none;
+}
