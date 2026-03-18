@@ -13,3 +13,10 @@ canvas {
   cursor: grab;
 }
 
+h1 {
+	display: none;
+}
+
+p {
+	display: none;
+}
