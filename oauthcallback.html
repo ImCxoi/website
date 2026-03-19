@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OAuth Callback</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; text-align: center; }
+    code { background: #f4f4f4; padding: 4px 8px; border-radius: 4px; display: block; margin: 1rem auto; max-width: 90%; word-wrap: break-word; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>OAuth Code Capture</h1>
+  <div id="output">Checking for OAuth code...</div>
+
+  <script>
+    // Get the query params
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const error = params.get("error");
+    const output = document.getElementById("output");
+
+    if (code) {
+      // Code received
+      output.innerHTML = `
+        <p class="success">OAuth code received!</p>
+        <p>Copy this code to your application:</p>
+        <code>${code}</code>
+      `;
+      console.log("OAuth code:", code);
+    } else if (error) {
+      // Some error returned from Google
+      output.innerHTML = `
+        <p class="error">Error: ${error}</p>
+        <p>Check your OAuth flow.</p>
+      `;
+      console.error("OAuth error:", error);
+    } else {
+      // No code or error in URL
+      output.innerHTML = `
+        <p class="error">No OAuth code found in the URL.</p>
+        <p>Make sure you used the correct authorization URL and completed login/consent.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
